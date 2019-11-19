@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <h1>Work For Tomorrow</h1>
+    <button id="cta">Watch Here</button>
+
+    <button id="pause">Pause</button>
+
+    <div class="panel">
+        <img id="light" src="asset/light-bulb.svg" alt="">
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit
+        </p>
+        <div class="box"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TimelineLite.min.js" integrity="sha256-nuhNsfXzBFR6G1lKP8bK77dakkQDqdHcQ4OCFZvk6Qo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js" integrity="sha256-lPE3wjN2a7ABWHbGz7+MKBJaykyzqCbU96BJWjio86U=" crossorigin="anonymous"></script>
+    <script src="script/app.js"></script>
+
+    <script>
+        var tl = new TimelineMax({
+            paused: true,
+            repeat: 3,
+            yoyo: true
+        });
+
+        tl.to('.panel', 1.5, {scaleY:1, height:'100vh', ease: Circ.easeOut});
+        tl.to('#light', 1, {opacity: 1, y: 0, delay: 1, ease: Back.easeOut.config(1.7)});
+        tl.to('p', 1, {opacity:1, y:20});
+        tl.to('.box', 3, {opacity:1, scale:1, ease: Elastic.easeOut.config(1, 0.3)},'-=3.5');
+        tl.reversed(true);
+
+        document.getElementById('cta').addEventListener('click',function () {
+        //    tl.play();
+            tl.reversed(!tl.reversed());
+            if (tl.reversed())
+                tl.reverse();
+            else
+                tl.play();
+            
+        });
+
+        document.getElementById('pause').addEventListener('click',function () {
+            if (tl.paused()){
+                tl.play();
+            }else{
+                tl.pause();
+                tl.paused(true);
+            }
+        });
+
+    </script>
+</body>
+</html>
